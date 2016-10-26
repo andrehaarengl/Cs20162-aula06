@@ -5,7 +5,7 @@
  */
 package com.mycompany.ordemservico;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -13,12 +13,41 @@ import org.junit.Test;
  */
 public class CpfdoisTest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void numeroIvalido() {
-        int Vet[] = new int[12];
-        for (int i = 0; i < 10; i++) {
-            Vet[i] = 0;
-        }
-        Cpfdois.cpfDois(Vet);
+    @org.junit.Test
+    public void test2Cpf2() {
+        int d[] = new int[11];
+        d[0] = 0;
+        d[1] = 0;
+        d[2] = 0;
+        d[3] = 0;
+        d[4] = 0;
+        d[5] = 0;
+        d[6] = 0;
+        d[7] = 0;
+        d[8] = 0;
+        d[9] = 0;
+        d[10] = 1;
+
+        assertEquals(false, Cpfdois.cpfDois(d));
     }
+
+    @org.junit.Test
+    public void test2Cpf3() {
+        int d[] = new int[12];
+        d[0] = 0;
+        d[1] = 0;
+        d[2] = 0;
+        d[3] = 0;
+        d[4] = 0;
+        d[5] = 0;
+        d[6] = 0;
+        d[7] = 0;
+        d[8] = 0;
+        d[9] = 0;
+        d[10] = 0;
+        d[11] = 0;
+
+        assertEquals(false, Cpfdois.cpfDois(d));
+    }
+
 }

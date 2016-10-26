@@ -9,29 +9,53 @@ package com.mycompany.ordemservico;
  *
  * @author andre
  */
-public class Cpf {
+public final class Cpf {
+
+    /**
+     * Classe contendo apenas operações "static". Evita que instância seja
+     * criada desnecessariamente.
+     */
+    private Cpf() {
+    }
+    /**
+     * valor fixo da formula.
+     */
+    public static final int TAM_CPF = 11;
+    /**
+     * valor fixo da formula.
+     */
+    public static final int NOVE = 9;
+    /**
+     * valor fixo da formula.
+     */
+    public static final int DEZ = 10;
 
     /**
      *
-     * @param d
-     * @return j == d[9] && k == d[10]
+     * @param d entrada de um vetor que representa o numero do CPF
+     * @return j == d[9] && k == d[10] retorna true or false sobre o CPF
      */
-    public static boolean Cpfvalido(int d[]) {
+    public static boolean cpfvalido(final int d[]) {
 
-        int sj = 0, sk = 0, j = 0, k = 0, soma = 0;
-        for (int i = 0; i < 12; i++) {
-            soma += d[i];
+        if (d.length > TAM_CPF) {
+            return false;
         }
-        if (soma <= 0) {
-            throw new IllegalArgumentException("NUMERO INVALIDO");
-        } else {
-            sj = d[0] + 2 * d[1] + 3 * d[2] + 4 * d[3] + 5 * d[4] + 6 * d[5]
-                    + 7 * d[6] + 8 * d[7] + 9 * d[8];
-            sk = d[1] + 2 * d[2] + 3 * d[3] + 4 * d[4] + 5 * d[5] + 6 * d[6]
-                    + 7 * d[7] + 8 * d[8] + 9 * d[9];
-            j = ((sk % 10) % 9);
-            k = ((sk % 10) % 9);
-            return j == d[9] && k == d[10];
+
+        int sj = 0, sk = 0, j = 0, k = 0, soma = 1;
+        
+        for (int i = 0; i <= (NOVE - 1); i++) {
+            sj = sj + (d[i] * soma);
+            soma++;
         }
+
+        for (int i = 1; i <= NOVE; i++) {
+            sj = sj + (d[i] * soma);
+            soma++;
+        }
+
+        j = (sk % TAM_CPF) % DEZ;
+        k = (sk % TAM_CPF) % DEZ;
+        return j == d[NOVE] && k == d[DEZ];
     }
+
 }
